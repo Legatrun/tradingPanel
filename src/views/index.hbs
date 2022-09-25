@@ -1,0 +1,91 @@
+<div class="col-md-6 offset-md-3">
+
+    <div class="card bg-dark text-light">
+        <div class="card-header">
+            <h1 class="h4 text-white">Lista de inversores</h1>
+        </div>
+        <div class="card-body">
+            {{#if contacts}}
+                <ul class="list-group">
+                    {{#each contacts}}
+                    <li class="list-group-item flex justify-content-between align-items-center">
+                        <h3>{{firstname}} {{lastname}}</h3>
+                        <p>{{email}}</p>
+                        <p>{{phone}}</p>
+
+                        <a class="btn btn-danger" href="/delete-contact/{{id}}">Borrar Usuario</a>
+                        <a class="btn btn-secondary" href="/edit-contact/{{id}}">
+                            Editar Información
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No hay contactos</p>
+            {{/if}}
+        </div>
+
+        <div class="card-footer">
+            <form action="{{#unless contact.id}}/new-contact{{else}}/update-contact/{{contact.id}}{{/unless}}" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <label for="firstname">Nombre:</label>
+                        <input 
+                            type="text" 
+                            name="firstname" 
+                            placeholder="first name" 
+                            id="firstname"
+                            value="{{contact.firstname}}"
+                            class="form-control mb-2"
+                        >
+                    </div>
+                    <div class="col">
+                        <label for="lastname">Apellido:</label>
+                        <input 
+                        type="text" 
+                        name="lastname" 
+                        placeholder="last name" 
+                        id="lastname"
+                        value="{{contact.lastname}}"
+                        class="form-control mb-2"
+                        >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email">Email:</label>
+                        <input 
+                        type="text" 
+                        name="email" 
+                        placeholder="email" 
+                        id="email"
+                        value="{{contact.email}}"
+                        class="form-control mb-2"
+                        >
+                    </div>
+                    <div class="col">
+                        <label for="phone">Telefono:</label>
+                        <input 
+                        type="text" 
+                        name="phone" 
+                        placeholder="phone" 
+                        id="phone"
+                        value="{{contact.phone}}"
+                        class="form-control mb-2"
+                        >
+                    </div>
+                </div>
+                
+                {{#if contact.id}}
+                    <button class="btn btn-primary btn-block">Actualizar</button>
+                    <a href="/" class="btn btn-secondary">Cancelar</a>
+                {{else}}
+                    <button class="btn btn-primary btn-block">Añadir</button>
+                {{/if}}
+
+            </form>
+        </div>
+    </div>
+
+
+</div>
